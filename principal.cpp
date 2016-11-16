@@ -1,5 +1,6 @@
 #include "principal.h"
 #include "ui_principal.h"
+#include "acerca.h"
 
 Principal::Principal(QWidget *parent) :
     QMainWindow(parent),
@@ -11,4 +12,10 @@ Principal::Principal(QWidget *parent) :
 Principal::~Principal()
 {
     delete ui;
+}
+
+void Principal::on_actionAcerca_de_triggered()
+{
+    Acerca *acerca=new Acerca();
+    acerca->show();
 }

@@ -13,11 +13,14 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        principal.cpp
+        principal.cpp \
+    acerca.cpp
 
-HEADERS  += principal.h
+HEADERS  += principal.h \
+    acerca.h
 
-FORMS    += principal.ui
+FORMS    += principal.ui \
+    acerca.ui
 
 CONFIG += mobility
 MOBILITY = 
