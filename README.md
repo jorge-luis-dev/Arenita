@@ -1,2 +1,2 @@
 # Arenita
-ERP en QT
+ERP en QT para Ecuador
