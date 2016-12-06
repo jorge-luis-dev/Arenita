@@ -15,6 +15,9 @@ public:
     explicit Administrador(QWidget *parent = 0);
     ~Administrador();
 
+private slots:
+    void on_actionEmpresa_triggered();
+
 private:
     Ui::Administrador *ui;
 };

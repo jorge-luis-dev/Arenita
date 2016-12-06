@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Administrador</class>
- <widget class="QMainWindow" name="Administrador">
-  <property name="windowModality">
-   <enum>Qt::NonModal</enum>
-  </property>
+ <class>AdmEmpresa</class>
+ <widget class="QMainWindow" name="AdmEmpresa">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -14,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Administrador</string>
+   <string>Empresa</string>
   </property>
   <widget class="QWidget" name="centralwidget"/>
   <widget class="QMenuBar" name="menubar">
@@ -26,20 +23,8 @@
      <height>22</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuAdministrar">
-    <property name="title">
-     <string>Administrar</string>
-    </property>
-    <addaction name="actionEmpresa"/>
-   </widget>
-   <addaction name="menuAdministrar"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionEmpresa">
-   <property name="text">
-    <string>Empresa</string>
-   </property>
-  </action>
  </widget>
  <resources/>
  <connections/>

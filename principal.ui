@@ -28,6 +28,7 @@
      <string>Módulos</string>
     </property>
     <addaction name="actionAdministrador"/>
+    <addaction name="actionInventarios"/>
    </widget>
    <widget class="QMenu" name="menuAyuda">
     <property name="title">
@@ -49,6 +50,11 @@
   <action name="actionAdministrador">
    <property name="text">
     <string>Administrador</string>
+   </property>
+  </action>
+  <action name="actionInventarios">
+   <property name="text">
+    <string>Inventarios</string>
    </property>
   </action>
  </widget>
