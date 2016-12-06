@@ -17,19 +17,19 @@ SOURCES += main.cpp\
     acerca.cpp \
     iniciarsesion.cpp \
     administrador.cpp \
-    admempresa.cpp
+    administrador/administrar/empresa.cpp
 
 HEADERS  += principal.h \
     acerca.h \
     iniciarsesion.h \
     administrador.h \
-    admempresa.h
+    administrador/administrar/empresa.h
 
 FORMS    += principal.ui \
     acerca.ui \
     iniciarsesion.ui \
     administrador.ui \
-    admempresa.ui
+    administrador/administrar/empresa.ui
 
 CONFIG += mobility
 MOBILITY = 

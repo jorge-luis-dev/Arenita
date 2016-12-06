@@ -1,6 +1,6 @@
 #include "administrador.h"
 #include "ui_administrador.h"
-#include "admempresa.h"
+#include "administrador/administrar/empresa.h"
 
 Administrador::Administrador(QWidget *parent) :
     QMainWindow(parent),
@@ -16,6 +16,6 @@ Administrador::~Administrador()
 
 void Administrador::on_actionEmpresa_triggered()
 {
-    AdmEmpresa* empresa=new AdmEmpresa();
+    Empresa* empresa=new Empresa();
     empresa->showMaximized();
 }
