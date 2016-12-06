@@ -1,6 +1,7 @@
 #include "principal.h"
 #include "ui_principal.h"
 #include "acerca.h"
+#include "administrador.h"
 
 Principal::Principal(QWidget *parent) :
     QMainWindow(parent),
@@ -18,4 +19,12 @@ void Principal::on_actionAcerca_de_triggered()
 {
     Acerca *acerca=new Acerca();
     acerca->show();
+}
+
+
+
+void Principal::on_actionAdministrador_triggered()
+{
+    Administrador* administrador=new Administrador();
+    administrador->showMaximized();
 }

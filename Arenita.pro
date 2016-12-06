@@ -14,13 +14,19 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         principal.cpp \
-    acerca.cpp
+    acerca.cpp \
+    iniciarsesion.cpp \
+    administrador.cpp
 
 HEADERS  += principal.h \
-    acerca.h
+    acerca.h \
+    iniciarsesion.h \
+    administrador.h
 
 FORMS    += principal.ui \
-    acerca.ui
+    acerca.ui \
+    iniciarsesion.ui \
+    administrador.ui
 
 CONFIG += mobility
 MOBILITY = 

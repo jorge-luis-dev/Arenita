@@ -11,7 +11,10 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Acerca de:</string>
+  </property>
+  <property name="modal">
+   <bool>true</bool>
   </property>
   <widget class="QLabel" name="lblDescripcion">
    <property name="geometry">

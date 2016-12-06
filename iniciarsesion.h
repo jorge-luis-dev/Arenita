@@ -15,6 +15,11 @@ public:
     explicit IniciarSesion(QWidget *parent = 0);
     ~IniciarSesion();
 
+private slots:
+    void reject();
+    void OnQuit();
+    void OnLogin();
+
 private:
     Ui::IniciarSesion *ui;
 };
