@@ -33,7 +33,26 @@
     <addaction name="actionEmpresa"/>
     <addaction name="actionUsuario"/>
    </widget>
+   <widget class="QMenu" name="menuTransacci_n">
+    <property name="title">
+     <string>Transacción</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuReporte">
+    <property name="title">
+     <string>Reporte</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuParametro">
+    <property name="title">
+     <string>Parámetro</string>
+    </property>
+    <addaction name="actionServidor"/>
+   </widget>
    <addaction name="menuAdministrar"/>
+   <addaction name="menuTransacci_n"/>
+   <addaction name="menuReporte"/>
+   <addaction name="menuParametro"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionEmpresa">
@@ -44,6 +63,11 @@
   <action name="actionUsuario">
    <property name="text">
     <string>Usuario</string>
+   </property>
+  </action>
+  <action name="actionServidor">
+   <property name="text">
+    <string>Servidor</string>
    </property>
   </action>
  </widget>
