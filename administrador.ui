@@ -23,7 +23,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>22</height>
+     <height>19</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuAdministrar">
@@ -31,6 +31,7 @@
      <string>Administrar</string>
     </property>
     <addaction name="actionEmpresa"/>
+    <addaction name="actionUsuario"/>
    </widget>
    <addaction name="menuAdministrar"/>
   </widget>
@@ -38,6 +39,11 @@
   <action name="actionEmpresa">
    <property name="text">
     <string>Empresa</string>
+   </property>
+  </action>
+  <action name="actionUsuario">
+   <property name="text">
+    <string>Usuario</string>
    </property>
   </action>
  </widget>
