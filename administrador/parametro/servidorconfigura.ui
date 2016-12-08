@@ -11,16 +11,16 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Configración del Servidor</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="formLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>140</x>
-      <y>90</y>
+      <x>130</x>
+      <y>120</y>
       <width>371</width>
-      <height>101</height>
+      <height>161</height>
      </rect>
     </property>
     <layout class="QFormLayout" name="formLayout">
