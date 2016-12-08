@@ -18,6 +18,8 @@ public:
 private slots:
     void on_actionEmpresa_triggered();
 
+    void on_actionServidor_triggered();
+
 private:
     Ui::Administrador *ui;
 };
