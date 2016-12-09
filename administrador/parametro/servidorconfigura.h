@@ -13,7 +13,13 @@ class ServidorConfigura : public QMainWindow
 
 public:
     explicit ServidorConfigura(QWidget *parent = 0);
+    static const QString homeConfig;
     ~ServidorConfigura();
+
+private slots:
+    void on_pushCrearArchivoConfig_clicked();
+    bool crearCarpetaArenitaConfig();
+    bool crearArchivoArenita_ini();
 
 private:
     Ui::ServidorConfigura *ui;
