@@ -1,8 +1,7 @@
 #include "servidorconfigura.h"
 #include "ui_servidorconfigura.h"
-#include <QDir>
 #include <QMessageBox>
-#include <QSettings>
+
 
 const QString ServidorConfigura::homeConfig = QDir::homePath() + QDir::separator() + "ArenitaConfig";
 
@@ -26,7 +25,7 @@ ServidorConfigura::~ServidorConfigura()
 
 void ServidorConfigura::on_pushCrearArchivoConfig_clicked()
 {
-    crearArchivoArenita_ini();
+    crearArchivoArenita_ini(ui->txtNombreServidor->text(),ui->txtDireccionIP->text(),"Servidores");
 }
 
 bool ServidorConfigura::crearCarpetaArenitaConfig(){
@@ -39,12 +38,11 @@ bool ServidorConfigura::crearCarpetaArenitaConfig(){
     return true;
 }
 
-bool ServidorConfigura::crearArchivoArenita_ini(){
+bool ServidorConfigura::crearArchivoArenita_ini(QString nombreServidor, QString ipServidor, QString grupo){
     QSettings settings(homeConfig + QDir::separator() +"Arenita.ini", QSettings::NativeFormat);
 
-    settings.beginGroup("Servidores");
-    settings.setValue("Servidor/Arenita", "127.0.0.1");
-    settings.setValue("Servidor/Jorge","192.168.1.18");
+    settings.beginGroup(grupo);
+    settings.setValue("Servidor/"+nombreServidor, ipServidor);
     settings.endGroup();
 
     settings.beginGroup("Prioridad");

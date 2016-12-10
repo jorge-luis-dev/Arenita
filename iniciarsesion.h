@@ -19,6 +19,7 @@ private slots:
     void reject();
     void OnQuit();
     void OnLogin();
+    QString getServidorPredeterminado();
 
 private:
     Ui::IniciarSesion *ui;

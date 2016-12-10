@@ -2,12 +2,17 @@
 #include "ui_iniciarsesion.h"
 #include "principal.h"
 #include <QMessageBox>
+#include "administrador/parametro/servidorconfigura.h"
+#include <QDebug>
 
 IniciarSesion::IniciarSesion(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::IniciarSesion)
 {
     ui->setupUi(this);
+
+    ui->txtServidor->setText(getServidorPredeterminado());
+
     connect(ui->pushCancelar,SIGNAL(pressed()),this,SLOT(OnQuit()));
     connect(ui->pushAceptar,SIGNAL(pressed()),this,SLOT(OnLogin()));
 }
@@ -32,6 +37,14 @@ void IniciarSesion::OnLogin(){
         this->destroy();
     }
 
+}
+QString IniciarSesion::getServidorPredeterminado(){
+    QSettings settings(ServidorConfigura::homeConfig+ QDir::separator() +"Arenita.ini", QSettings::NativeFormat);
+    settings.beginGroup("Prioridad");
+    QString servidor=settings.value("Servidor").toString();
+    settings.endGroup();
+    qDebug() << "Servidor predeterminado:" << servidor;
+    return servidor;
 }
 
 IniciarSesion::~IniciarSesion()

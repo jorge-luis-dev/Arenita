@@ -40,7 +40,7 @@
         <string/>
        </property>
        <property name="text">
-        <string>Crear Archivo</string>
+        <string>Añadir Configuración</string>
        </property>
       </widget>
      </item>

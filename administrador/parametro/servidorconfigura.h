@@ -2,6 +2,8 @@
 #define SERVIDORCONFIGURA_H
 
 #include <QMainWindow>
+#include <QSettings>
+#include <QDir>
 
 namespace Ui {
 class ServidorConfigura;
@@ -19,7 +21,7 @@ public:
 private slots:
     void on_pushCrearArchivoConfig_clicked();
     bool crearCarpetaArenitaConfig();
-    bool crearArchivoArenita_ini();
+    bool crearArchivoArenita_ini(QString nombreServidor, QString ipServidor, QString grupo);
 
 private:
     Ui::ServidorConfigura *ui;
