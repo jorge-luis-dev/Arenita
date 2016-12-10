@@ -42,7 +42,7 @@ bool ServidorConfigura::crearArchivoArenita_ini(QString nombreServidor, QString 
     QSettings settings(homeConfig + QDir::separator() +"Arenita.ini", QSettings::NativeFormat);
 
     settings.beginGroup(grupo);
-    settings.setValue("Servidor/"+nombreServidor, ipServidor);
+    settings.setValue(nombreServidor, ipServidor);
     settings.endGroup();
 
     settings.beginGroup("Prioridad");
