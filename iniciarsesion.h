@@ -21,6 +21,8 @@ private slots:
     void OnLogin();
     QString getServidorPredeterminado();
     QStringList getServidores();
+    bool Login(QString u, QString p);
+
 
 private:
     Ui::IniciarSesion *ui;

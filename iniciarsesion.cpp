@@ -5,6 +5,7 @@
 #include "administrador/parametro/servidorconfigura.h"
 #include <QCompleter>
 #include <QDebug>
+#include "qdbhelper.h"
 
 IniciarSesion::IniciarSesion(QWidget *parent) :
     QDialog(parent),
@@ -41,7 +42,8 @@ void IniciarSesion::OnLogin(){
         QMessageBox::information(this,tr("Advertencia"),"Usuario o clave, no validos");
     }
     else{
-        this->destroy();
+        Login("jorge","a");
+        //this->destroy();
     }
 
 }
@@ -80,3 +82,28 @@ IniciarSesion::~IniciarSesion()
 }
 
 
+bool IniciarSesion::Login(QString u, QString p)
+{
+
+    const char* driverName = "QPSQL";
+    QdbHelper* qdbHelper = new QdbHelper(driverName);
+    QSqlDatabase* db = qdbHelper->connect("localhost", "postgres", "postgres", "postgres");
+
+    bool exists = false;
+
+    QSqlQuery checkQuery(*db);
+    checkQuery.prepare("select tipo,estado from seg_usuarios where usuario=(:un)");
+    checkQuery.bindValue(":un", u);
+
+    if (checkQuery.exec())
+    {
+        if (checkQuery.next())
+        {
+            exists = true;
+            qDebug() << "Tipo" << checkQuery.value("tipo").toString();
+            qDebug() << "Estado" << checkQuery.value("estado").toString();
+        }
+    }
+    qDebug() << "Existe" << exists;
+    return exists;
+}

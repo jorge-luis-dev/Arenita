@@ -18,14 +18,16 @@ SOURCES += main.cpp\
     iniciarsesion.cpp \
     administrador.cpp \
     administrador/administrar/empresa.cpp \
-    administrador/parametro/servidorconfigura.cpp
+    administrador/parametro/servidorconfigura.cpp \
+    qdbhelper.cpp
 
 HEADERS  += principal.h \
     acerca.h \
     iniciarsesion.h \
     administrador.h \
     administrador/administrar/empresa.h \
-    administrador/parametro/servidorconfigura.h
+    administrador/parametro/servidorconfigura.h \
+    qdbhelper.h
 
 FORMS    += principal.ui \
     acerca.ui \
