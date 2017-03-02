@@ -25,7 +25,7 @@ ServidorConfigura::~ServidorConfigura()
 
 void ServidorConfigura::on_pushCrearArchivoConfig_clicked()
 {
-    crearArchivoArenita_ini(ui->txtNombreServidor->text(),ui->txtDireccionIP->text(),ui->txtPuerto->text());
+    crearArchivoArenita_ini(ui->txtNombreServidor->text(),ui->txtDireccionIP->text(),ui->txtPuerto->text(),ui->txtBaseDatos->text());
 }
 
 bool ServidorConfigura::crearCarpetaArenitaConfig(){
@@ -38,12 +38,13 @@ bool ServidorConfigura::crearCarpetaArenitaConfig(){
     return true;
 }
 
-bool ServidorConfigura::crearArchivoArenita_ini(QString nombreServidor, QString ipServidor, QString puerto){
+bool ServidorConfigura::crearArchivoArenita_ini(QString nombreServidor, QString ipServidor, QString puerto, QString baseDatos){
     QSettings settings(homeConfig + QDir::separator() +"Arenita.ini", QSettings::NativeFormat);
 
     settings.beginGroup(nombreServidor);
     settings.setValue("ip", ipServidor);
     settings.setValue("puerto", puerto);
+    settings.setValue("baseDatos", baseDatos);
     settings.endGroup();
 
     settings.beginGroup("Prioridad");

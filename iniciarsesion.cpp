@@ -42,8 +42,8 @@ void IniciarSesion::OnLogin(){
         QMessageBox::information(this,tr("Advertencia"),"Usuario o clave, no validos");
     }
     else{
-        Login("jorge","a");
-        //this->destroy();
+        Conectar();
+        this->destroy();
     }
 
 }
@@ -62,6 +62,8 @@ QStringList IniciarSesion::getServidores(){
 
     QStringList grupos = settings.childGroups();
 
+    grupos.removeOne("Prioridad");
+
     foreach (const QString &group, grupos) {
         QString groupString = QString("%1").arg(group);
         settings.beginGroup(group);
@@ -71,14 +73,53 @@ QStringList IniciarSesion::getServidores(){
             QString valor;
             nombre.append(QString("%1").arg(key));
             valor.append(QString("%1").arg(settings.value(key).toString()));
-            qDebug() << "Nombre:" << nombre;
-            qDebug() << "Valor:" << valor;
+            qDebug() << "  Nombre:" << nombre << " Valor:" << valor;
         }
-
+        qDebug() << "\n";
         settings.endGroup();
     }
 
-     return grupos;
+    return grupos;
+}
+
+IniciarSesion::DatosConexion IniciarSesion::getDatosConexion()
+{
+    DatosConexion datosConexion;
+    QSettings settings(ServidorConfigura::homeConfig+ QDir::separator() +"Arenita.ini", QSettings::NativeFormat);
+
+    settings.beginGroup(ui->txtServidor->text());
+
+    const QStringList servidor = settings.childKeys();
+    /*
+     * Recupera los datos de conexión en la estructura
+    */
+    foreach (const QString &nombre, servidor)
+    {
+        if(nombre=="ip"){
+            datosConexion.ip=settings.value(nombre).toString();
+        }
+        else if (nombre=="puerto") {
+            datosConexion.puerto=settings.value(nombre).toString();
+        }
+        else if (nombre=="baseDatos") {
+            datosConexion.baseDatos=settings.value(nombre).toString();
+        }
+    }
+    settings.endGroup();
+    /*
+     * Añade el usuario y la clave en la estructura
+    */
+    datosConexion.usuario=ui->txtUsuario->text();
+    datosConexion.clave=ui->txtClave->text();
+
+    qDebug() << "Datos de Conexión";
+    qDebug() << "ip:" << datosConexion.ip;
+    qDebug() << "puerto:" << datosConexion.puerto;
+    qDebug() << "base de datos:" << datosConexion.baseDatos;
+    //qDebug() << "usuario:" << datosConexion.usuario;
+    //qDebug() << "clave:" << datosConexion.clave;
+
+    return datosConexion;
 }
 
 IniciarSesion::~IniciarSesion()
@@ -87,18 +128,22 @@ IniciarSesion::~IniciarSesion()
 }
 
 
-bool IniciarSesion::Login(QString u, QString p)
+bool IniciarSesion::Conectar()
 {
 
     const char* driverName = "QPSQL";
     QdbHelper* qdbHelper = new QdbHelper(driverName);
-    QSqlDatabase* db = qdbHelper->connect("localhost", "5432","postgres", "postgres", "horiz0ns");
+
+
+    DatosConexion dc=getDatosConexion();
+
+    QSqlDatabase* db = qdbHelper->connect(dc.ip, dc.puerto, dc.baseDatos, dc.usuario, dc.clave);
 
     bool exists = false;
 
     QSqlQuery checkQuery(*db);
-    checkQuery.prepare("select tipo,estado from seg_usuarios where usuario=(:un)");
-    checkQuery.bindValue(":un", u);
+    checkQuery.prepare("select tipo,estado from seg_usuarios where usuario=(:u)");
+    checkQuery.bindValue(":u", dc.usuario);
 
     if (checkQuery.exec())
     {

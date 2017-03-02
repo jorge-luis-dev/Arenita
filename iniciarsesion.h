@@ -13,15 +13,19 @@ class IniciarSesion : public QDialog
 
 public:
     explicit IniciarSesion(QWidget *parent = 0);
+    struct DatosConexion {
+        QString ip, puerto, baseDatos, usuario, clave;
+    };
     ~IniciarSesion();
 
-private slots:
+private slots:    
     void reject();
     void OnQuit();
     void OnLogin();
     QString getServidorPredeterminado();
     QStringList getServidores();
-    bool Login(QString u, QString p);
+    DatosConexion getDatosConexion();
+    bool Conectar();
 
 
     void on_pushConexiones_clicked();
