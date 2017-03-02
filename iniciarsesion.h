@@ -24,6 +24,8 @@ private slots:
     bool Login(QString u, QString p);
 
 
+    void on_pushConexiones_clicked();
+
 private:
     Ui::IniciarSesion *ui;
 };

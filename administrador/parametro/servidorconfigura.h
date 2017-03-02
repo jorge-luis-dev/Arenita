@@ -21,7 +21,7 @@ public:
 private slots:
     void on_pushCrearArchivoConfig_clicked();
     bool crearCarpetaArenitaConfig();
-    bool crearArchivoArenita_ini(QString nombreServidor, QString ipServidor, QString grupo);
+    bool crearArchivoArenita_ini(QString nombreServidor, QString ipServidor, QString puerto);
 
 private:
     Ui::ServidorConfigura *ui;

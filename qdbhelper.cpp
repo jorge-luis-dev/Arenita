@@ -12,12 +12,14 @@ QdbHelper::~QdbHelper()
 }
 
 QSqlDatabase* QdbHelper::connect( const QString& server,
+                                  const QString& port,
                                      const QString& databaseName,
                                      const QString& userName,
                                      const QString& password )
 {
     db->setConnectOptions();
     db->setHostName(server);
+    db->setPort(port.toInt());
     db->setDatabaseName(databaseName);
     db->setUserName(userName);
     db->setPassword(password);

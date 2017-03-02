@@ -11,6 +11,7 @@ public:
     QdbHelper(const char* driver);
     ~QdbHelper();
         QSqlDatabase* connect( const QString& server,
+                               const QString& port,
                                const QString& databaseName,
                                const QString& userName,
                                const QString& password );

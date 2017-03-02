@@ -60,20 +60,25 @@ QString IniciarSesion::getServidorPredeterminado(){
 QStringList IniciarSesion::getServidores(){
     QSettings settings(ServidorConfigura::homeConfig+ QDir::separator() +"Arenita.ini", QSettings::NativeFormat);
 
-    settings.beginGroup("Servidores");
-    const QStringList listaServidores = settings.childKeys();
+    QStringList grupos = settings.childGroups();
 
-    QStringList nombre;
-    QStringList valor;
+    foreach (const QString &group, grupos) {
+        QString groupString = QString("%1").arg(group);
+        settings.beginGroup(group);
+        qDebug() << "Grupo:" << groupString;
+        foreach (const QString &key, settings.childKeys()) {
+            QString nombre;
+            QString valor;
+            nombre.append(QString("%1").arg(key));
+            valor.append(QString("%1").arg(settings.value(key).toString()));
+            qDebug() << "Nombre:" << nombre;
+            qDebug() << "Valor:" << valor;
+        }
 
-    foreach (const QString &servidor, listaServidores)
-     {
-            nombre << servidor;
-            valor << settings.value(servidor).toString();
-            qDebug() << "Servidor:" << servidor << "IP:" << settings.value(servidor).toString();
-     }
-     settings.endGroup();
-     return listaServidores;
+        settings.endGroup();
+    }
+
+     return grupos;
 }
 
 IniciarSesion::~IniciarSesion()
@@ -87,7 +92,7 @@ bool IniciarSesion::Login(QString u, QString p)
 
     const char* driverName = "QPSQL";
     QdbHelper* qdbHelper = new QdbHelper(driverName);
-    QSqlDatabase* db = qdbHelper->connect("localhost", "postgres", "postgres", "postgres");
+    QSqlDatabase* db = qdbHelper->connect("localhost", "5432","postgres", "postgres", "horiz0ns");
 
     bool exists = false;
 
@@ -106,4 +111,10 @@ bool IniciarSesion::Login(QString u, QString p)
     }
     qDebug() << "Existe" << exists;
     return exists;
+}
+
+void IniciarSesion::on_pushConexiones_clicked()
+{
+    ServidorConfigura* configura=new ServidorConfigura();
+    configura->showMaximized();
 }

@@ -18,9 +18,9 @@
     <property name="geometry">
      <rect>
       <x>130</x>
-      <y>140</y>
+      <y>150</y>
       <width>371</width>
-      <height>108</height>
+      <height>171</height>
      </rect>
     </property>
     <layout class="QFormLayout" name="formLayout">
@@ -33,16 +33,6 @@
      </item>
      <item row="0" column="1">
       <widget class="QLineEdit" name="txtHome"/>
-     </item>
-     <item row="3" column="1">
-      <widget class="QPushButton" name="pushCrearArchivoConfig">
-       <property name="accessibleName">
-        <string/>
-       </property>
-       <property name="text">
-        <string>Añadir Configuración</string>
-       </property>
-      </widget>
      </item>
      <item row="1" column="1">
       <widget class="QLineEdit" name="txtNombreServidor">
@@ -72,6 +62,30 @@
        </property>
       </widget>
      </item>
+     <item row="4" column="1">
+      <widget class="QPushButton" name="pushCrearArchivoConfig">
+       <property name="accessibleName">
+        <string/>
+       </property>
+       <property name="text">
+        <string>Añadir Configuración</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLineEdit" name="txtPuerto">
+       <property name="text">
+        <string>5432</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="lblPuerto">
+       <property name="text">
+        <string>Puerto</string>
+       </property>
+      </widget>
+     </item>
     </layout>
    </widget>
   </widget>
@@ -81,7 +95,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>19</height>
+     <height>23</height>
     </rect>
    </property>
   </widget>
