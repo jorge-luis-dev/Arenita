@@ -42,8 +42,12 @@ void IniciarSesion::OnLogin(){
         QMessageBox::information(this,tr("Advertencia"),"Usuario o clave, no validos");
     }
     else{
-        Conectar();
-        this->destroy();
+        if (Conectar()){
+            this->destroy();
+        }
+        else{
+            QMessageBox::critical(this,tr("Advertencia"),"No se pudo establecer la conexión");
+        }
     }
 
 }
@@ -84,7 +88,7 @@ QStringList IniciarSesion::getServidores(){
 
 IniciarSesion::DatosConexion IniciarSesion::getDatosConexion()
 {
-    DatosConexion datosConexion;
+    DatosConexion dc;
     QSettings settings(ServidorConfigura::homeConfig+ QDir::separator() +"Arenita.ini", QSettings::NativeFormat);
 
     settings.beginGroup(ui->txtServidor->text());
@@ -96,30 +100,30 @@ IniciarSesion::DatosConexion IniciarSesion::getDatosConexion()
     foreach (const QString &nombre, servidor)
     {
         if(nombre=="ip"){
-            datosConexion.ip=settings.value(nombre).toString();
+            dc.ip=settings.value(nombre).toString();
         }
         else if (nombre=="puerto") {
-            datosConexion.puerto=settings.value(nombre).toString();
+            dc.puerto=settings.value(nombre).toString();
         }
         else if (nombre=="baseDatos") {
-            datosConexion.baseDatos=settings.value(nombre).toString();
+            dc.baseDatos=settings.value(nombre).toString();
         }
     }
     settings.endGroup();
     /*
      * Añade el usuario y la clave en la estructura
     */
-    datosConexion.usuario=ui->txtUsuario->text();
-    datosConexion.clave=ui->txtClave->text();
+    dc.usuario=ui->txtUsuario->text();
+    dc.clave=ui->txtClave->text();
 
     qDebug() << "Datos de Conexión";
-    qDebug() << "ip:" << datosConexion.ip;
-    qDebug() << "puerto:" << datosConexion.puerto;
-    qDebug() << "base de datos:" << datosConexion.baseDatos;
+    qDebug() << "ip:" << dc.ip;
+    qDebug() << "puerto:" << dc.puerto;
+    qDebug() << "base de datos:" << dc.baseDatos;
     //qDebug() << "usuario:" << datosConexion.usuario;
     //qDebug() << "clave:" << datosConexion.clave;
 
-    return datosConexion;
+    return dc;
 }
 
 IniciarSesion::~IniciarSesion()
@@ -139,22 +143,39 @@ bool IniciarSesion::Conectar()
 
     QSqlDatabase* db = qdbHelper->connect(dc.ip, dc.puerto, dc.baseDatos, dc.usuario, dc.clave);
 
+    QString tipo;
+    QString estado;
     bool exists = false;
+    if(db){
+        QSqlQuery checkQuery(*db);
+        checkQuery.prepare("select tipo,estado from seg_usuarios where usuario=(:u)");
+        checkQuery.bindValue(":u", dc.usuario);
 
-    QSqlQuery checkQuery(*db);
-    checkQuery.prepare("select tipo,estado from seg_usuarios where usuario=(:u)");
-    checkQuery.bindValue(":u", dc.usuario);
-
-    if (checkQuery.exec())
-    {
-        if (checkQuery.next())
+        if (checkQuery.exec())
         {
-            exists = true;
-            qDebug() << "Tipo" << checkQuery.value("tipo").toString();
-            qDebug() << "Estado" << checkQuery.value("estado").toString();
+            if (checkQuery.next())
+            {
+                exists = true;
+                tipo = checkQuery.value("tipo").toString();
+                qDebug() << "Tipo" << tipo;
+                estado = checkQuery.value("estado").toString();
+                qDebug() << "Estado" << estado;
+                if(estado=="Inactivo"){
+                    QMessageBox::warning(this,tr("Advertencia"),"El usuario está inactivo");
+                    exists = false;
+                }
+            }
+            else{
+                QMessageBox::warning(this,tr("Advertencia"),"El usuario no está registrado en la base de datos");
+            }
         }
+        qDebug() << "Existe" << exists;
+
     }
-    qDebug() << "Existe" << exists;
+    if(exists){
+        datosConexion=dc;
+        datosConexion.tipo=tipo;
+    }
     return exists;
 }
 

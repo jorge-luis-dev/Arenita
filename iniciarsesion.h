@@ -14,8 +14,9 @@ class IniciarSesion : public QDialog
 public:
     explicit IniciarSesion(QWidget *parent = 0);
     struct DatosConexion {
-        QString ip, puerto, baseDatos, usuario, clave;
+        QString ip, puerto, baseDatos, usuario, clave, tipo;
     };
+    DatosConexion datosConexion;
     ~IniciarSesion();
 
 private slots:    
