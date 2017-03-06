@@ -2,6 +2,8 @@
 #define INICIARSESION_H
 
 #include <QDialog>
+#include "principal.h"
+#include "base/conectar.h"
 
 namespace Ui {
 class IniciarSesion;
@@ -11,12 +13,11 @@ class IniciarSesion : public QDialog
 {
     Q_OBJECT
 
-public:
+public:    
     explicit IniciarSesion(QWidget *parent = 0);
-    struct DatosConexion {
-        QString ip, puerto, baseDatos, usuario, clave, tipo;
-    };
-    DatosConexion datosConexion;
+
+    Principal *w=new Principal();
+
     ~IniciarSesion();
 
 private slots:    
@@ -25,10 +26,7 @@ private slots:
     void OnLogin();
     QString getServidorPredeterminado();
     QStringList getServidores();
-    DatosConexion getDatosConexion();
-    bool Conectar();
-
-
+    bool conectarServidor();
     void on_pushConexiones_clicked();
 
 private:

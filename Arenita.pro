@@ -19,7 +19,7 @@ SOURCES += main.cpp\
     administrador.cpp \
     administrador/administrar/empresa.cpp \
     administrador/parametro/servidorconfigura.cpp \
-    qdbhelper.cpp
+    base/conectar.cpp
 
 HEADERS  += principal.h \
     acerca.h \
@@ -27,7 +27,7 @@ HEADERS  += principal.h \
     administrador.h \
     administrador/administrar/empresa.h \
     administrador/parametro/servidorconfigura.h \
-    qdbhelper.h
+    base/conectar.h
 
 FORMS    += principal.ui \
     acerca.ui \

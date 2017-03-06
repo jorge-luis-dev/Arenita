@@ -1,11 +1,9 @@
 #include "iniciarsesion.h"
 #include "ui_iniciarsesion.h"
-#include "principal.h"
 #include <QMessageBox>
 #include "administrador/parametro/servidorconfigura.h"
 #include <QCompleter>
 #include <QDebug>
-#include "qdbhelper.h"
 
 IniciarSesion::IniciarSesion(QWidget *parent) :
     QDialog(parent),
@@ -19,10 +17,20 @@ IniciarSesion::IniciarSesion(QWidget *parent) :
     ui->txtServidor->setCompleter(completer);
 
     ui->txtServidor->setText(getServidorPredeterminado());
+    ui->txtTipo->hide();
 
-
+    /*
+     * Señales para eventos de botones
+     */
     connect(ui->pushCancelar,SIGNAL(pressed()),this,SLOT(OnQuit()));
-    connect(ui->pushAceptar,SIGNAL(pressed()),this,SLOT(OnLogin()));
+    connect(ui->pushAceptar,SIGNAL(pressed()),this,SLOT(OnLogin()));    
+    /*
+     * Señales para paso de valores entre ventanas
+     */
+    connect(ui->txtUsuario,SIGNAL(textChanged(QString)),w,SLOT(setUsuario(QString)));
+    connect(ui->txtClave,SIGNAL(textChanged(QString)),w,SLOT(setClave(QString)));
+    connect(ui->txtServidor,SIGNAL(textEdited(QString)),w,SLOT(setServidor(QString)));
+    connect(ui->txtTipo,SIGNAL(textChanged(QString)),w,SLOT(setTipo(QString)));
 }
 
 void IniciarSesion::reject(){
@@ -42,11 +50,14 @@ void IniciarSesion::OnLogin(){
         QMessageBox::information(this,tr("Advertencia"),"Usuario o clave, no validos");
     }
     else{
-        if (Conectar()){
+        if (conectarServidor()){
+            w->showMaximized();
+            this->hide();
+            this->close();
             this->destroy();
         }
         else{
-            QMessageBox::critical(this,tr("Advertencia"),"No se pudo establecer la conexión");
+            QMessageBox::critical(this,tr("Error"),"No se pudo establecer la conexión");
         }
     }
 
@@ -86,62 +97,18 @@ QStringList IniciarSesion::getServidores(){
     return grupos;
 }
 
-IniciarSesion::DatosConexion IniciarSesion::getDatosConexion()
-{
-    DatosConexion dc;
-    QSettings settings(ServidorConfigura::homeConfig+ QDir::separator() +"Arenita.ini", QSettings::NativeFormat);
-
-    settings.beginGroup(ui->txtServidor->text());
-
-    const QStringList servidor = settings.childKeys();
-    /*
-     * Recupera los datos de conexión en la estructura
-    */
-    foreach (const QString &nombre, servidor)
-    {
-        if(nombre=="ip"){
-            dc.ip=settings.value(nombre).toString();
-        }
-        else if (nombre=="puerto") {
-            dc.puerto=settings.value(nombre).toString();
-        }
-        else if (nombre=="baseDatos") {
-            dc.baseDatos=settings.value(nombre).toString();
-        }
-    }
-    settings.endGroup();
-    /*
-     * Añade el usuario y la clave en la estructura
-    */
-    dc.usuario=ui->txtUsuario->text();
-    dc.clave=ui->txtClave->text();
-
-    qDebug() << "Datos de Conexión";
-    qDebug() << "ip:" << dc.ip;
-    qDebug() << "puerto:" << dc.puerto;
-    qDebug() << "base de datos:" << dc.baseDatos;
-    //qDebug() << "usuario:" << datosConexion.usuario;
-    //qDebug() << "clave:" << datosConexion.clave;
-
-    return dc;
-}
-
 IniciarSesion::~IniciarSesion()
 {
     delete ui;
 }
 
 
-bool IniciarSesion::Conectar()
+bool IniciarSesion::conectarServidor()
 {
+    QString servidor = ui->txtServidor->text();
+    Conectar *co = new Conectar(servidor);
 
-    const char* driverName = "QPSQL";
-    QdbHelper* qdbHelper = new QdbHelper(driverName);
-
-
-    DatosConexion dc=getDatosConexion();
-
-    QSqlDatabase* db = qdbHelper->connect(dc.ip, dc.puerto, dc.baseDatos, dc.usuario, dc.clave);
+    QSqlDatabase* db = co->conecta(ui->txtUsuario->text(),ui->txtClave->text());
 
     QString tipo;
     QString estado;
@@ -149,7 +116,7 @@ bool IniciarSesion::Conectar()
     if(db){
         QSqlQuery checkQuery(*db);
         checkQuery.prepare("select tipo,estado from seg_usuarios where usuario=(:u)");
-        checkQuery.bindValue(":u", dc.usuario);
+        checkQuery.bindValue(":u", ui->txtUsuario->text());
 
         if (checkQuery.exec())
         {
@@ -173,8 +140,7 @@ bool IniciarSesion::Conectar()
 
     }
     if(exists){
-        datosConexion=dc;
-        datosConexion.tipo=tipo;
+        ui->txtTipo->setText(tipo);
     }
     return exists;
 }
