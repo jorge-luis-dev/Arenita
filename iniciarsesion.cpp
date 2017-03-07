@@ -140,8 +140,10 @@ bool IniciarSesion::conectarServidor()
 
     }
     if(existe){
-        existe = true;
+        this->mensaje = Mensaje(ui->txtUsuario->text(),ui->txtClave->text(),tipo,
+                                ui->txtServidor->text());
     }
+    db->close();
     return existe;
 }
 
@@ -150,9 +152,10 @@ void IniciarSesion::on_pushConexiones_clicked()
     ServidorConfigura* configura=new ServidorConfigura();
     configura->showMaximized();
 }
-
+/*
+ * Función que envía los parámetros
+ */
 void IniciarSesion::sendMessage()
-{
-    this->mensaje = Mensaje(ui->txtServidor->text(), ui->txtClave->text());
+{    
     emit messageSent(this->mensaje);
 }

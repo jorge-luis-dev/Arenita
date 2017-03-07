@@ -20,7 +20,10 @@ Principal::~Principal()
 void Principal::setMensaje(const Mensaje &mensaje)
 {
     this->mensaje = mensaje;
-    qDebug() << "Mensaje:" << this->mensaje.getBody() << this->mensaje.getHeaders();
+    qDebug() << "Mensaje:" << this->mensaje.getUsuario() << this->mensaje.getClave()
+             << this->mensaje.getTipo() << this->mensaje.getServidor();
+    ui->lblUsuario->setText(" "+mensaje.getUsuario()+"  |  "+mensaje.getTipo()
+                            +"  |  "+mensaje.getServidor());
 }
 
 void Principal::on_actionAcerca_de_triggered()

@@ -9,13 +9,17 @@ public:
     Mensaje(const Mensaje &other);
     ~Mensaje();
 
-    Mensaje(const QString &getBody, const QString &getHeaders);
+    Mensaje(const QString usuario,const QString &clave, const QString &tipo, const QString &servidor);
 
-    QString getBody() const;
-    QString getHeaders() const;
+    QString getUsuario() const;
+    QString getClave() const;
+    QString getTipo() const;
+    QString getServidor() const;
 
 private:
-    QString m_body;
-    QString m_headers;
+    QString usuario;
+    QString clave;
+    QString tipo;
+    QString servidor;
 };
 #endif // MENSAJE_H

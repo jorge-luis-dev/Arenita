@@ -6,26 +6,40 @@ Mensaje::Mensaje()
 
 Mensaje::Mensaje(const Mensaje &other)
 {
-    m_body = other.m_body;
-    m_headers = other.m_headers;
+    usuario = other.usuario;
+    clave = other.clave;
+    tipo = other.tipo;
+    servidor = other.servidor;
 }
 
 Mensaje::~Mensaje()
 {
 }
 
-Mensaje::Mensaje(const QString &body, const QString &headers)
+Mensaje::Mensaje(const QString usuario, const QString &clave, const QString &tipo, const QString &servidor)
 {
-    m_body = body;
-    m_headers = headers;
+    this->usuario = usuario;
+    this->clave = clave;
+    this->tipo = tipo;
+    this->servidor = servidor;
+}
+QString Mensaje::getUsuario() const
+{
+    return usuario;
+}
+QString Mensaje::getClave() const
+{
+    return clave;
 }
 
-QString Mensaje::getBody() const
+QString Mensaje::getTipo() const
 {
-    return m_body;
+    return tipo;
 }
 
-QString Mensaje::getHeaders() const
+QString Mensaje::getServidor() const
 {
-    return m_headers;
+    return servidor;
 }
+
+
