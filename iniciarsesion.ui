@@ -108,19 +108,6 @@
     <string>Conexión</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="txtTipo">
-   <property name="geometry">
-    <rect>
-     <x>260</x>
-     <y>200</y>
-     <width>113</width>
-     <height>26</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Tipo</string>
-   </property>
-  </widget>
  </widget>
  <resources/>
  <connections>

@@ -4,6 +4,7 @@
 #include <QDialog>
 #include "principal.h"
 #include "base/conectar.h"
+#include "base/mensaje.h"
 
 namespace Ui {
 class IniciarSesion;
@@ -15,12 +16,19 @@ class IniciarSesion : public QDialog
 
 public:    
     explicit IniciarSesion(QWidget *parent = 0);
-
+    Mensaje mensaje;
     Principal *w=new Principal();
 
     ~IniciarSesion();
 
-private slots:    
+private:
+    Ui::IniciarSesion *ui;
+
+signals:
+    void messageSent(const Mensaje &mensaje);
+
+private slots:
+    void sendMessage();
     void reject();
     void OnQuit();
     void OnLogin();
@@ -28,9 +36,6 @@ private slots:
     QStringList getServidores();
     bool conectarServidor();
     void on_pushConexiones_clicked();
-
-private:
-    Ui::IniciarSesion *ui;
 };
 
 #endif // INICIARSESION_H

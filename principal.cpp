@@ -1,8 +1,6 @@
 #include "principal.h"
 #include "ui_principal.h"
-#include "acerca.h"
-#include "administrador.h"
-
+#include <QDebug>
 
 Principal::Principal(QWidget *parent) :
     QMainWindow(parent),
@@ -11,6 +9,7 @@ Principal::Principal(QWidget *parent) :
     ui->setupUi(this);
     ui->toolBar->addWidget(ui->lblNombreUsuario);
     ui->toolBar->addWidget(ui->lblUsuario);
+
 }
 
 Principal::~Principal()
@@ -18,13 +17,17 @@ Principal::~Principal()
     delete ui;
 }
 
+void Principal::setMensaje(const Mensaje &mensaje)
+{
+    this->mensaje = mensaje;
+    qDebug() << "Mensaje:" << this->mensaje.getBody() << this->mensaje.getHeaders();
+}
+
 void Principal::on_actionAcerca_de_triggered()
 {
     Acerca *acerca=new Acerca();
     acerca->show();
 }
-
-
 
 void Principal::on_actionAdministrador_triggered()
 {
@@ -35,20 +38,5 @@ void Principal::on_actionAdministrador_triggered()
 void Principal::setUsuario(QString usuario)
 {
     ui->lblUsuario->setText(usuario);
-}
-
-void Principal::setClave(QString clave)
-{
-    ui->txtClave->setText(clave);
-}
-
-void Principal::setTipo(QString tipo)
-{
-    ui->lblTipo->setText(tipo);
-}
-
-void Principal::setServidor(QString servidor)
-{
-    ui->lblServidor->setText(servidor);
 }
 

@@ -11,13 +11,14 @@ IniciarSesion::IniciarSesion(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    ui->pushConexiones->hide();
 
     QCompleter *completer = new QCompleter(getServidores(), this);
     completer->setCaseSensitivity(Qt::CaseInsensitive);
     ui->txtServidor->setCompleter(completer);
 
     ui->txtServidor->setText(getServidorPredeterminado());
-    ui->txtTipo->hide();
+
 
     /*
      * Señales para eventos de botones
@@ -28,9 +29,7 @@ IniciarSesion::IniciarSesion(QWidget *parent) :
      * Señales para paso de valores entre ventanas
      */
     connect(ui->txtUsuario,SIGNAL(textChanged(QString)),w,SLOT(setUsuario(QString)));
-    connect(ui->txtClave,SIGNAL(textChanged(QString)),w,SLOT(setClave(QString)));
-    connect(ui->txtServidor,SIGNAL(textEdited(QString)),w,SLOT(setServidor(QString)));
-    connect(ui->txtTipo,SIGNAL(textChanged(QString)),w,SLOT(setTipo(QString)));
+    connect(this,SIGNAL(messageSent(Mensaje)),w,SLOT(setMensaje(Mensaje)));
 }
 
 void IniciarSesion::reject(){
@@ -51,6 +50,7 @@ void IniciarSesion::OnLogin(){
     }
     else{
         if (conectarServidor()){
+            sendMessage();
             w->showMaximized();
             this->hide();
             this->close();
@@ -112,7 +112,7 @@ bool IniciarSesion::conectarServidor()
 
     QString tipo;
     QString estado;
-    bool exists = false;
+    bool existe = false;
     if(db){
         QSqlQuery checkQuery(*db);
         checkQuery.prepare("select tipo,estado from seg_usuarios where usuario=(:u)");
@@ -122,31 +122,37 @@ bool IniciarSesion::conectarServidor()
         {
             if (checkQuery.next())
             {
-                exists = true;
+                existe = true;
                 tipo = checkQuery.value("tipo").toString();
                 qDebug() << "Tipo" << tipo;
                 estado = checkQuery.value("estado").toString();
                 qDebug() << "Estado" << estado;
                 if(estado=="Inactivo"){
                     QMessageBox::warning(this,tr("Advertencia"),"El usuario está inactivo");
-                    exists = false;
+                    existe = false;
                 }
             }
             else{
                 QMessageBox::warning(this,tr("Advertencia"),"El usuario no está registrado en la base de datos");
             }
         }
-        qDebug() << "Existe" << exists;
+        qDebug() << "Existe" << existe;
 
     }
-    if(exists){
-        ui->txtTipo->setText(tipo);
+    if(existe){
+        existe = true;
     }
-    return exists;
+    return existe;
 }
 
 void IniciarSesion::on_pushConexiones_clicked()
 {
     ServidorConfigura* configura=new ServidorConfigura();
     configura->showMaximized();
+}
+
+void IniciarSesion::sendMessage()
+{
+    this->mensaje = Mensaje(ui->txtServidor->text(), ui->txtClave->text());
+    emit messageSent(this->mensaje);
 }

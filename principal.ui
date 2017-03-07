@@ -18,8 +18,8 @@
     <property name="geometry">
      <rect>
       <x>110</x>
-      <y>220</y>
-      <width>56</width>
+      <y>250</y>
+      <width>61</width>
       <height>18</height>
      </rect>
     </property>
@@ -27,56 +27,23 @@
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Nombre de usuario&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
     <property name="text">
-     <string>Usuario:</string>
+     <string>Usuario</string>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QLabel" name="lblNombreUsuario">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>220</y>
+      <x>10</x>
+      <y>250</y>
       <width>119</width>
       <height>18</height>
      </rect>
     </property>
     <property name="text">
      <string>Usuario: </string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="txtClave">
-    <property name="geometry">
-     <rect>
-      <x>110</x>
-      <y>250</y>
-      <width>113</width>
-      <height>26</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLabel" name="lblTipo">
-    <property name="geometry">
-     <rect>
-      <x>110</x>
-      <y>280</y>
-      <width>151</width>
-      <height>18</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Tipo</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="lblServidor">
-    <property name="geometry">
-     <rect>
-      <x>110</x>
-      <y>310</y>
-      <width>72</width>
-      <height>18</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Servidor</string>
     </property>
    </widget>
   </widget>
@@ -94,7 +61,8 @@
      <string>Módulos</string>
     </property>
     <addaction name="actionAdministrador"/>
-    <addaction name="actionInventarios"/>
+    <addaction name="separator"/>
+    <addaction name="actionContabilidad"/>
    </widget>
    <widget class="QMenu" name="menuAyuda">
     <property name="title">
@@ -113,8 +81,9 @@
     <enum>BottomToolBarArea</enum>
    </attribute>
    <attribute name="toolBarBreak">
-    <bool>false</bool>
+    <bool>true</bool>
    </attribute>
+   <addaction name="separator"/>
   </widget>
   <action name="actionAcerca_de">
    <property name="text">
@@ -129,9 +98,9 @@
     <string>Administrador</string>
    </property>
   </action>
-  <action name="actionInventarios">
+  <action name="actionContabilidad">
    <property name="text">
-    <string>Inventarios</string>
+    <string>Contabilidad</string>
    </property>
   </action>
  </widget>

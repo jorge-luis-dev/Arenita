@@ -19,7 +19,8 @@ SOURCES += main.cpp\
     administrador.cpp \
     administrador/administrar/empresa.cpp \
     administrador/parametro/servidorconfigura.cpp \
-    base/conectar.cpp
+    base/conectar.cpp \
+    base/mensaje.cpp
 
 HEADERS  += principal.h \
     acerca.h \
@@ -27,7 +28,8 @@ HEADERS  += principal.h \
     administrador.h \
     administrador/administrar/empresa.h \
     administrador/parametro/servidorconfigura.h \
-    base/conectar.h
+    base/conectar.h \
+    base/mensaje.h
 
 FORMS    += principal.ui \
     acerca.ui \
