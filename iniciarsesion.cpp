@@ -144,6 +144,7 @@ bool IniciarSesion::conectarServidor()
                                 ui->txtServidor->text());
     }
     db->close();
+    co->desconecta();
     return existe;
 }
 

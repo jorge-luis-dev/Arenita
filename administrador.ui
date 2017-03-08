@@ -16,14 +16,31 @@
   <property name="windowTitle">
    <string>Administrador</string>
   </property>
-  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="lblMensaje">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>450</y>
+      <width>72</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Mensaje:</string>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+  </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>19</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuAdministrar">
@@ -47,6 +64,7 @@
     <property name="title">
      <string>Parámetro</string>
     </property>
+    <addaction name="actionLocalidad"/>
     <addaction name="actionServidor"/>
    </widget>
    <addaction name="menuAdministrar"/>
@@ -68,6 +86,11 @@
   <action name="actionServidor">
    <property name="text">
     <string>Servidor</string>
+   </property>
+  </action>
+  <action name="actionLocalidad">
+   <property name="text">
+    <string>Localidad</string>
    </property>
   </action>
  </widget>

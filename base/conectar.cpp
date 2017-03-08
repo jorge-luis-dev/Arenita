@@ -7,6 +7,11 @@ Conectar::Conectar(const QString &servidor)
     qDebug() << "Driver:" << db->driverName();
 }
 
+Conectar::~Conectar()
+{
+    db->close();
+}
+
 QSqlDatabase *Conectar::conecta(const QString &usuario, const QString &clave)
 {
     db->setConnectOptions();
@@ -57,4 +62,9 @@ Conectar::DatosConexion Conectar::getDatosConexion(QString servidor)
     qDebug() << "base de datos:" << dc.base;
 
     return dc;
+}
+
+void Conectar::desconecta()
+{
+        db->close();
 }
