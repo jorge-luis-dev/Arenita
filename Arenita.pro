@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     base/conectar.cpp \
     base/mensaje.cpp \
     administrador/parametro/localidad.cpp \
-    administrador/parametro/localidaddialogo.cpp
+    administrador/parametro/localidaddialogo.cpp \
+    administrador/parametro/localidadform.cpp
 
 HEADERS  += principal.h \
     acerca.h \
@@ -33,7 +34,8 @@ HEADERS  += principal.h \
     base/conectar.h \
     base/mensaje.h \
     administrador/parametro/localidad.h \
-    administrador/parametro/localidaddialogo.h
+    administrador/parametro/localidaddialogo.h \
+    administrador/parametro/localidadform.h
 
 FORMS    += principal.ui \
     acerca.ui \
@@ -42,7 +44,8 @@ FORMS    += principal.ui \
     administrador/administrar/empresa.ui \
     administrador/parametro/servidorconfigura.ui \
     administrador/parametro/localidad.ui \
-    administrador/parametro/localidaddialogo.ui
+    administrador/parametro/localidaddialogo.ui \
+    administrador/parametro/localidadform.ui
 
 CONFIG += mobility
 MOBILITY = 

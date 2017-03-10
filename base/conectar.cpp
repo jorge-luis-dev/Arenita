@@ -1,9 +1,24 @@
 #include "conectar.h"
 
+
 Conectar::Conectar(const QString &servidor)
 {
     dc = getDatosConexion(servidor);
-    db = new QSqlDatabase( QSqlDatabase::addDatabase("QPSQL") );
+    QStringList list = QSqlDatabase::connectionNames();
+
+    if(QSqlDatabase::contains("qt_sql_default_connection"))
+        db = new  QSqlDatabase(QSqlDatabase::database("qt_sql_default_connection"));
+    else
+        db = new QSqlDatabase(QSqlDatabase::addDatabase("QPSQL"));
+    /*
+    qDebug() << "Número de bases:" << list.count();
+    if(list.count()>0){
+        for(int i = 0; i < list.count(); ++i) {
+            QSqlDatabasePrivate::removeDatabase(list[i]);
+            qDebug() << "Nombres de conexión:" << list[i];
+        }
+    }
+    */
     qDebug() << "Driver:" << db->driverName();
 }
 
@@ -66,5 +81,6 @@ Conectar::DatosConexion Conectar::getDatosConexion(QString servidor)
 
 void Conectar::desconecta()
 {
+        //QSqlDatabase::removeDatabase(db->connectionName());
         db->close();
 }

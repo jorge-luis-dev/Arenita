@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>LocalidadForm</class>
+ <widget class="QMainWindow" name="LocalidadForm">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="formLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>20</y>
+      <width>481</width>
+      <height>381</height>
+     </rect>
+    </property>
+    <layout class="QFormLayout" name="formLayout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="lblId">
+       <property name="layoutDirection">
+        <enum>Qt::RightToLeft</enum>
+       </property>
+       <property name="text">
+        <string>Códi&amp;go</string>
+       </property>
+       <property name="buddy">
+        <cstring>txtId</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="txtId"/>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="lblLocalidad">
+       <property name="text">
+        <string>&amp;Nombre</string>
+       </property>
+       <property name="buddy">
+        <cstring>txtLocalidad</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="txtLocalidad"/>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="lblEstado">
+       <property name="text">
+        <string>&amp;Estado</string>
+       </property>
+       <property name="buddy">
+        <cstring>checkEstado</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="lblIdLocalidad">
+       <property name="text">
+        <string>&amp;Superior</string>
+       </property>
+       <property name="buddy">
+        <cstring>txtIdLocalidad</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QLineEdit" name="txtIdLocalidad"/>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="lblObservacion">
+       <property name="text">
+        <string>&amp;Observación</string>
+       </property>
+       <property name="buddy">
+        <cstring>textObservacion</cstring>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QTextEdit" name="textObservacion"/>
+     </item>
+     <item row="2" column="1">
+      <widget class="QCheckBox" name="checkEstado">
+       <property name="text">
+        <string>Activo / Inactivo</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QPushButton" name="pushAceptar">
+         <property name="text">
+          <string>&amp;Aceptar</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushCancelar">
+         <property name="text">
+          <string>&amp;Cancelar</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>23</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <tabstops>
+  <tabstop>txtId</tabstop>
+  <tabstop>txtLocalidad</tabstop>
+  <tabstop>checkEstado</tabstop>
+  <tabstop>txtIdLocalidad</tabstop>
+  <tabstop>textObservacion</tabstop>
+  <tabstop>pushAceptar</tabstop>
+  <tabstop>pushCancelar</tabstop>
+ </tabstops>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>pushCancelar</sender>
+   <signal>clicked()</signal>
+   <receiver>LocalidadForm</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>552</x>
+     <y>390</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>608</x>
+     <y>442</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

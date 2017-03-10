@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include "base/mensaje.h"
-#include "localidaddialogo.h"
+#include "localidadform.h"
 
 namespace Ui {
 class Localidad;
@@ -16,7 +16,7 @@ class Localidad : public QMainWindow
 public:
     explicit Localidad(QWidget *parent = 0);
     Mensaje mensaje;
-    LocalidadDialogo *ld = new LocalidadDialogo();
+    LocalidadForm *ld = new LocalidadForm();
     ~Localidad();
 
 private:
@@ -31,6 +31,7 @@ public slots:
 private slots:
     void sendMessage();
     void on_pushNuevo_clicked();
+    void on_pushModificar_clicked();
 };
 
 #endif // LOCALIDAD_H

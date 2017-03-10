@@ -30,3 +30,8 @@ void Localidad::on_pushNuevo_clicked()
     sendMessage();
     ld->showMaximized();
 }
+
+void Localidad::on_pushModificar_clicked()
+{
+    ui->lblMensaje->setText("Modificar");
+}
