@@ -11,7 +11,7 @@ IniciarSesion::IniciarSesion(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    ui->pushConexiones->hide();
+    //ui->pushConexiones->hide();
 
     QCompleter *completer = new QCompleter(getServidores(), this);
     completer->setCaseSensitivity(Qt::CaseInsensitive);
@@ -151,6 +151,7 @@ bool IniciarSesion::conectarServidor()
 void IniciarSesion::on_pushConexiones_clicked()
 {
     ServidorConfigura* configura=new ServidorConfigura();
+    this->hide();
     configura->showMaximized();
 }
 /*
